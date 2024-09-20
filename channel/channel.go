@@ -14,13 +14,13 @@ func Channelmain() {
 }
 
 func Even(ch chan string, numb *int) {
-	fmt.Println(numb)
+	fmt.Println(*numb)
 	*numb += 1
 	ch <- "OKEven"
 }
 
 func Odd(ch chan string, numb *int) {
-	fmt.Println(numb)
+	fmt.Println(*numb)
 	*numb += 1
 	ch <- "OKOdd"
 }
@@ -33,12 +33,11 @@ func ChannelPrint() {
 			break
 		}
 		if num%2 == 0 {
-			Even(chanOK, &num)
+			go Even(chanOK, &num)
 		} else {
-			Odd(chanOK, &num)
+			go Odd(chanOK, &num)
 		}
-		ok := <-chanOK
-		fmt.Println(ok)
+		_ = <-chanOK
 	}
 
 }
