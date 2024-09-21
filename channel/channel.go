@@ -1,6 +1,9 @@
 package channel
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 func worker(ch chan int) {
 	ch <- 42
@@ -37,7 +40,23 @@ func ChannelPrint() {
 		} else {
 			go Odd(chanOK, &num)
 		}
-		_ = <-chanOK
+		ok := <-chanOK
+		fmt.Println(ok)
 	}
 
+}
+
+func support(ch chan string, wt *sync.WaitGroup) {
+	fmt.Println("Entered support using go routine")
+	wt.Done()
+	ch <- "Done"
+}
+func ChannelWorkerMain() {
+	var wt sync.WaitGroup
+	wt.Add(1)
+	ch := make(chan string)
+	go support(ch, &wt)
+	wt.Wait()
+	cp := <-ch
+	fmt.Println(cp)
 }
