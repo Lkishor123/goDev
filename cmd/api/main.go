@@ -4,10 +4,11 @@ package main
 	ch "goDev/channel"
 	ds "goDev/datastruct"
 	interfc "goDev/interfacestruct"
-)*/
+	dsgnptn "goDev/designpatterns"
 
+)*/
 import (
-	ds "goDev/datastruct"
+	wsn "goDev/wessen"
 )
 
 func main() {
@@ -15,5 +16,7 @@ func main() {
 	// channel.ChannelPrint()
 	//interfc.Interfacemain()
 	//ch.ChannelWorkerMain()
-	ds.LLmain()
+	// ds.LLmain()
+	// dsgnptn.Singletonmain()
+	wsn.Wessenmain()
 }
